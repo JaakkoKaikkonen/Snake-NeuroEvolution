@@ -8,8 +8,15 @@ namespace engine {
 	{
 		_snake.emplace_back(sf::RectangleShape(sf::Vector2f(TILESIZE, TILESIZE)));
 		_snake[0].setPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-		_snake[0].setOutlineColor(sf::Color::Black);
+		_snake[0].setFillColor(sf::Color::White);
+		_snake[0].setOutlineColor(sf::Color(6, 30, 62));
 		_snake[0].setOutlineThickness(1.0f);
+
+		_snake.emplace_back(sf::RectangleShape(sf::Vector2f(TILESIZE, TILESIZE)));
+		_snake[1].setPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + TILESIZE);
+		_snake[1].setFillColor(sf::Color::White);
+		_snake[1].setOutlineColor(sf::Color(6, 30, 62));
+		_snake[1].setOutlineThickness(1.0f);
 	}
 
 
@@ -59,7 +66,8 @@ namespace engine {
 		if (_snake[0].getPosition() == dot) {
 			_snake.emplace_back(sf::RectangleShape(sf::Vector2f(TILESIZE, TILESIZE)));
 			_snake[_snake.size() - 1].setPosition(previousPos1);
-			_snake[_snake.size() - 1].setOutlineColor(sf::Color::Black);
+			_snake[_snake.size() - 1].setFillColor(sf::Color::White);
+			_snake[_snake.size() - 1].setOutlineColor(sf::Color(6, 30, 62));
 			_snake[_snake.size() - 1].setOutlineThickness(1.0f);
 			return true;
 		} else {

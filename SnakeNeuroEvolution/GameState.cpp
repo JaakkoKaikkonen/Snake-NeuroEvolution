@@ -24,7 +24,7 @@ namespace engine {
 		_score = 0;
 		timeSinceFood = 0;
 
-		//AI/////////////////////////////////////////////////////////////////////// Record score 92
+		//AI/////////////////////////////////////////////////////////////////////// Record score 122
 		if (brainIndex == generationSize) {
 			brainIndex = 0;
 
@@ -54,7 +54,7 @@ namespace engine {
 		}
 
 
-		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 			_dir = Dir::Up;
 		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
 			_dir = Dir::Down;
@@ -62,7 +62,7 @@ namespace engine {
 			_dir = Dir::Right;
 		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 			_dir = Dir::Left;
-		}*/
+		}
 
 
 		if(_moveTimer >= moveDelay) {

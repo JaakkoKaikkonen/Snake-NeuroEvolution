@@ -33,7 +33,7 @@ namespace engine {
 
 		void run();
 
-		int speed = 30000;
+		int speed = 1;
 
 	};
 

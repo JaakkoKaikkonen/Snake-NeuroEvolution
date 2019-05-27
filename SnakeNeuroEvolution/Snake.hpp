@@ -38,7 +38,7 @@ namespace engine {
 
 		sf::Vector2f _moveVector;
 
-		Dir _dir;
+		Dir _dir = Dir::Up;
 
 		sf::Vector2f previousPos1;
 		sf::Vector2f previousPos2;

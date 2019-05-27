@@ -20,14 +20,14 @@ public:
 		data = new T[_rows * _cols];
 	}
 
-	Matrix(const Matrix & matrix)
+	Matrix(const Matrix& matrix)
 		: rows(matrix.rows), cols(matrix.cols) 
 	{
 		data = new T[rows * cols];
 		*this = matrix;
 	}
 
-	void operator=(const Matrix & matrix) {
+	void operator=(const Matrix& matrix) {
 		rows = matrix.rows;
 		cols = matrix.cols;
 
@@ -57,7 +57,7 @@ public:
 		data[x] = value;
 	}
 
-	static Matrix multiply(const Matrix & matrix1, const Matrix & matrix2) {
+	static Matrix multiply(const Matrix& matrix1, const Matrix& matrix2) {
 		assert(matrix1.cols == matrix2.rows);
 
 		Matrix result(matrix1.rows, matrix2.cols);
@@ -73,14 +73,14 @@ public:
 		}
 		return result;
 	}
-	Matrix operator*(const Matrix & M) {
+	Matrix operator*(const Matrix& M) {
 		return Matrix::multiply(*this, M);
 	}
-	void operator*=(const Matrix & M) {
+	void operator*=(const Matrix& M) {
 		*this = *this * M;
 	}
 
-	static Matrix hadamardProduct(const Matrix & matrix1, const Matrix & matrix2) {
+	static Matrix hadamardProduct(const Matrix& matrix1, const Matrix& matrix2) {
 		assert(matrix1.rows == matrix2.rows && matrix1.cols == matrix2.cols);
 
 		Matrix result(matrix1.rows, matrix1.cols);
@@ -93,7 +93,7 @@ public:
 		return result;
 	}
 
-	static Matrix add(const Matrix & matrix1, const Matrix & matrix2) {
+	static Matrix add(const Matrix& matrix1, const Matrix& matrix2) {
 		assert(matrix1.rows == matrix2.rows && matrix1.cols == matrix2.cols);
 
 		Matrix result(matrix1.rows, matrix1.cols);
@@ -105,14 +105,14 @@ public:
 		}
 		return result;
 	}
-	Matrix operator+(const Matrix & M) {
+	Matrix operator+(const Matrix& M) {
 		return Matrix::add(*this, M);
 	}
-	void operator+=(const Matrix & M) {
+	void operator+=(const Matrix& M) {
 		*this = *this + M;
 	}
 
-	static Matrix substract(const Matrix & matrix1, const Matrix & matrix2) {
+	static Matrix substract(const Matrix& matrix1, const Matrix& matrix2) {
 		assert(matrix1.rows == matrix2.rows && matrix1.cols == matrix2.cols);
 
 		Matrix result(matrix1.rows, matrix1.cols);
@@ -124,14 +124,14 @@ public:
 		}
 		return result;
 	}
-	Matrix operator-(const Matrix & M) {
+	Matrix operator-(const Matrix& M) {
 		return Matrix::substract(*this, M);
 	}
-	void operator-=(const Matrix & M) {
+	void operator-=(const Matrix& M) {
 		*this = *this - M;
 	}
 
-	static Matrix transpose(const Matrix & matrix) {
+	static Matrix transpose(const Matrix& matrix) {
 		Matrix result(matrix.cols, matrix.rows);
 
 		for(int i = 1; i <= matrix.rows; i++) {
