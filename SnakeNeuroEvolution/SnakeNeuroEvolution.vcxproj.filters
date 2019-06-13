@@ -14,7 +14,7 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Source Files\ImGui">
-      <UniqueIdentifier>{3339c9ad-3f19-4ab7-a85f-893583447c6d}</UniqueIdentifier>
+      <UniqueIdentifier>{29783abd-b1d8-4c12-b7e9-d8fa02946a94}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -51,19 +51,19 @@
     <ClCompile Include="NeuralNetwork.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\External Libraries\imgui-master\imgui.cpp">
+    <ClCompile Include="ImGui\imgui.cpp">
       <Filter>Source Files\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\External Libraries\imgui-master\imgui_draw.cpp">
+    <ClCompile Include="ImGui\imgui_demo.cpp">
       <Filter>Source Files\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\External Libraries\imgui-master\imgui_widgets.cpp">
+    <ClCompile Include="ImGui\imgui_draw.cpp">
       <Filter>Source Files\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\External Libraries\imgui-master\imgui_demo.cpp">
+    <ClCompile Include="ImGui\imgui_widgets.cpp">
       <Filter>Source Files\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\External Libraries\imgui-sfml-master\imgui-SFML.cpp">
+    <ClCompile Include="ImGui\imgui-SFML.cpp">
       <Filter>Source Files\ImGui</Filter>
     </ClCompile>
   </ItemGroup>

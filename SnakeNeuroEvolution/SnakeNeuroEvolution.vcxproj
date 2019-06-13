@@ -136,17 +136,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\External Libraries\imgui-master\imgui.cpp" />
-    <ClCompile Include="..\..\External Libraries\imgui-master\imgui_demo.cpp" />
-    <ClCompile Include="..\..\External Libraries\imgui-master\imgui_draw.cpp" />
-    <ClCompile Include="..\..\External Libraries\imgui-master\imgui_widgets.cpp" />
-    <ClCompile Include="..\..\External Libraries\imgui-sfml-master\imgui-SFML.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GeneticAlgorithm.cpp" />
+    <ClCompile Include="ImGui\imgui-SFML.cpp" />
+    <ClCompile Include="ImGui\imgui.cpp" />
+    <ClCompile Include="ImGui\imgui_demo.cpp" />
+    <ClCompile Include="ImGui\imgui_draw.cpp" />
+    <ClCompile Include="ImGui\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NeuralNetwork.cpp" />
     <ClCompile Include="Snake.cpp" />
