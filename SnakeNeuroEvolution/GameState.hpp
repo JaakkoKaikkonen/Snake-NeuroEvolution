@@ -11,7 +11,7 @@
 #include "Matrix.h"
 
 
-namespace engine {
+namespace Game {
 
 	class GameState : public State
 	{
@@ -21,8 +21,8 @@ namespace engine {
 		void init();
 
 		void handleInput();
-		void update(float dt);
-		void draw(float interpolation);
+		void update();
+		void draw(float dt, bool* fast);
 
 	private:
 		gameDataRef _data;
@@ -43,12 +43,6 @@ namespace engine {
 
 		int timeSinceFood = 0;
 
-		int _score = 0;
-
-		int _bestScore = 0;
-
-		int _generationBestScore = 0;
-
 
 		int moveDelay = 0;
 
@@ -62,7 +56,14 @@ namespace engine {
 		Matrix<float> inputs;
 
 		int generationCount = 1;
+
+		int _score = 0;
+
+		int _bestScore = 0;
+
+		int _generationBestScore = 0;
 		////////////////////////////////////////////////////
+
 	};
 
 }

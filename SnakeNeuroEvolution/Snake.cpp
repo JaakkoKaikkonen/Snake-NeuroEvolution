@@ -1,7 +1,7 @@
 #include "Snake.hpp"
 #include <iostream>
 
-namespace engine {
+namespace Game {
 
 	Snake::Snake(gameDataRef data)
 		: _data(data)
@@ -136,7 +136,7 @@ namespace engine {
 				}
 			}
 			if (found) {
-				inputs.set(0, (1 / (i / TILESIZE)) * 100);
+				inputs.set(0, 100/*(1 / (i / TILESIZE)) * 100*/);
 				break;
 			}
 		}
@@ -154,7 +154,7 @@ namespace engine {
 				}
 			}
 			if (found) {
-				inputs.set(1, (1 / (i / TILESIZE)) * 100);
+				inputs.set(1, 100/*(1 / (i / TILESIZE)) * 100*/);
 				break;
 			}
 		}
@@ -172,7 +172,7 @@ namespace engine {
 				}
 			}
 			if (found) {
-				inputs.set(2, (1 / (i / TILESIZE)) * 100);
+				inputs.set(2, 100/*(1 / (i / TILESIZE)) * 100*/);
 				break;
 			}
 		}
@@ -190,7 +190,7 @@ namespace engine {
 				}
 			}
 			if (found) {
-				inputs.set(3, (1 / (i / TILESIZE)) * 100);
+				inputs.set(3, 100/*(1 / (i / TILESIZE)) * 100*/);
 				break;
 			}
 		}

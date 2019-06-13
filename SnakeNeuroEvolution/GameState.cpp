@@ -2,22 +2,28 @@
 #include "DEFINITIONS.hpp"
 #include <iostream>
 
+#include "imgui.h"
+#include "imgui-SFML.h"
 
 
-
-namespace engine {
+namespace Game {
 
 	GameState::GameState(gameDataRef data)
 		: _data(data), _dot(sf::Vector2f(TILESIZE, TILESIZE)), _gameOverText("Game Over", _data->assets.getFont("Font")),
 		  GA(NeuralNetwork(12, 24, 4), generationSize),
 		  inputs(12, 1)
 	{
+		//ImGui/////////////////////////////////////////////////////////////
+		ImGui::SFML::Init(_data->window);
+		////////////////////////////////////////////////////////////////////
+
 		_dot.setFillColor(sf::Color::Red);
 
 		_gameOverText.setPosition(SCREEN_WIDTH / 2 - _gameOverText.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.25);
 	}
 
 	void GameState::init() {
+
 		//std::cout << "Game state" << std::endl;
 		_dot.setPosition((float)(rand() % (SCREEN_WIDTH / TILESIZE) * TILESIZE), (float)(rand() % (SCREEN_HEIGHT / TILESIZE) * TILESIZE));
 		_snake = new Snake(_data);
@@ -29,7 +35,7 @@ namespace engine {
 			brainIndex = 0;
 
 			GA.crossOver();
-			GA.mutate(0.004f);
+			GA.mutate(0.01f);
 
 			
 			std::cout << "GENERATION: " << generationCount << std::endl;
@@ -48,13 +54,17 @@ namespace engine {
 	void GameState::handleInput() {
 		sf::Event event;
 		while (_data->window.pollEvent(event)) {
+			//ImGui///////////////////////////////////////////////
+			ImGui::SFML::ProcessEvent(event);
+			/////////////////////////////////////////////////////
+
 			if (sf::Event::Closed == event.type) {
 				_data->window.close();
 			}
 		}
 
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 			_dir = Dir::Up;
 		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
 			_dir = Dir::Down;
@@ -62,10 +72,10 @@ namespace engine {
 			_dir = Dir::Right;
 		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 			_dir = Dir::Left;
-		}
+		}*/
 
 
-		if(_moveTimer >= moveDelay) {
+		if (_moveTimer >= moveDelay) {
 
 			timeSinceFood++;
 
@@ -105,7 +115,8 @@ namespace engine {
 
 	}
 
-	void GameState::update(float dt) {
+	void GameState::update() {
+
 
 		if (!_snake->dead()) {
 
@@ -135,7 +146,7 @@ namespace engine {
 			if (_score > _bestScore) {
 				_bestScore = _score;
 			}
-			if(_score > _generationBestScore) {
+			if (_score > _generationBestScore) {
 				_generationBestScore = _score;
 			}
 			GA.scores.at(brainIndex) = _score;
@@ -147,10 +158,21 @@ namespace engine {
 
 	}
 
-	void GameState::draw(float interpolation) {
+	void GameState::draw(float dt, bool* fast) {
+
+		//ImGui///////////////////////////////////////////////////////////////
+		ImGui::SFML::Update(_data->window, sf::seconds(dt));
+
+		ImGui::Begin("Settings");
+
+		ImGui::Checkbox("Fast", fast);
+
+        ImGui::End();
+		/////////////////////////////////////////////////////////////////////
+
+
 
 		_data->window.clear(sf::Color(51, 51, 51));
-
 		
 		_snake->draw();
 		
@@ -160,6 +182,10 @@ namespace engine {
 		if (_restart) {
 			_data->window.draw(_gameOverText);
 		}
+
+		//ImGui/////////////////////////////////
+		ImGui::SFML::Render(_data->window);
+		///////////////////////////////////////
 
 		_data->window.display();
 	}

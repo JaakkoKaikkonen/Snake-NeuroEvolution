@@ -6,7 +6,7 @@
 #include "DEFINITIONS.hpp"
 #include "Matrix.h"
 
-namespace engine {
+namespace Game {
 
 	class Snake
 	{

@@ -1,6 +1,6 @@
 #include "AssetManager.hpp"
 
-namespace engine {
+namespace Game {
 
 	void AssetManager::loadFont(std::string name, std::string fileName) {
 		sf::Font font;

@@ -6,15 +6,13 @@
 #include <SFML/Audio.hpp>
 #include "StateMachine.hpp"
 #include "AssetManager.hpp"
-#include "InputManager.hpp"
 
-namespace engine {
+namespace Game {
 
 	struct GameData {
 		StateMachine machine;
 		sf::RenderWindow window;
 		AssetManager assets;
-		InputManager input;
 	};
 
 	typedef std::shared_ptr<GameData> gameDataRef;
@@ -29,11 +27,11 @@ namespace engine {
 
 		const float dt = 1.0f / 60.0f;
 
+		bool fast = false;
+
 		gameDataRef _data = std::make_shared<GameData>();
 
 		void run();
-
-		int speed = 1;
 
 	};
 

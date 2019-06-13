@@ -1,6 +1,6 @@
 #pragma once
 
-namespace engine {
+namespace Game {
 
 	class State {
 
@@ -8,8 +8,8 @@ namespace engine {
 		virtual void init() = 0;
 
 		virtual void handleInput() = 0;
-		virtual void update(float dt) = 0;
-		virtual void draw(float interpolation) = 0;
+		virtual void update() = 0;
+		virtual void draw(float dt, bool* fast) = 0;
 
 		virtual void pause() {}
 		virtual void resume() {}

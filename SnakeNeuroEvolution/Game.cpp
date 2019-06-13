@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-namespace engine {
+namespace Game {
 
 	Game::Game(int width, int height, std::string title) {
 
@@ -45,6 +45,8 @@ namespace engine {
 
 		float accumulator = dt;
 
+		float accumulator2 = dt;
+
 		float interpolation = 0.0f;
 
 		
@@ -66,22 +68,23 @@ namespace engine {
 
 			accumulator += frameTime;
 
-			while (accumulator >= dt)
-			{
-				for(int i = 0; i < speed; i++) {
-					this->_data->machine.getActiveState()->handleInput();
-					this->_data->machine.getActiveState()->update(dt);
-				}
+			while (accumulator >= dt) {
 
+				this->_data->machine.getActiveState()->draw(dt, &fast);
+
+				this->_data->machine.getActiveState()->handleInput();
+				this->_data->machine.getActiveState()->update();
+			
 				accumulator -= dt;
 			}
 
-			interpolation = accumulator / dt;
+			if (fast) {
+				this->_data->machine.getActiveState()->handleInput();
+				this->_data->machine.getActiveState()->update();
+			}
+			
+			
 
-			this->_data->machine.getActiveState()->draw(interpolation);
-
-
-			//std::cout << 1 / frameTime << std::endl;
 		}
 
 
