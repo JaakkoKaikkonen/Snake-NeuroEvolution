@@ -64,7 +64,7 @@ namespace Game {
 		int _generationBestScore = 0;
 		////////////////////////////////////////////////////
 
-		char snakeFileName[255];
+		char snakeFileName[255] = "";
 
 	};
 
