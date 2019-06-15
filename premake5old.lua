@@ -3,7 +3,7 @@ workspace "SnakeNeuroEvolution"
 
 	configurations
 	{
-		"Debug",
+		--"Debug",
 		"Release"
 	}
 
@@ -36,41 +36,34 @@ project "SnakeNeuroEvolution"
 		"lib/SFML-2.5.0-x64/lib"
 	}
 
-	defines { "SFML_STATIC" }
+
 
 	filter "configurations:Release"
 		runtime "Release"
 		optimize "On"
 		links 
 		{
-			"sfml-graphics-s.lib",
-			"sfml-window-s.lib",
-			"sfml-system-s.lib",
+			"sfml-graphics.lib",
+			"sfml-window.lib",
+			"sfml-system.lib",
 			"sfml-main.lib",
-			"opengl32.lib",
-			"freetype.lib",
-			"winmm.lib",
-			"gdi32.lib",
 			"opengl32.lib"
 		}
 
-	filter "configurations:Debug"
+	--[[filter "configurations:Debug"
 		runtime "Debug"
 		symbols "On"
 		links
 		{
-			"sfml-graphics-s-d.lib",
-			"sfml-window-s-d.lib",
-			"sfml-system-s-d.lib",
+			"sfml-graphics-d.lib",
+			"sfml-window-d.lib",
+			"sfml-system-d.lib",
 			"sfml-main-d.lib",
-			"opengl32.lib",
-			"freetype.lib",
-		    "winmm.lib",
-		    "gdi32.lib",
-            "opengl32.lib"
-		}
+			"opengl32.lib"
+		}--]]
 		
-		
+
+
 	filter "system:windows"
 		cppdialect "C++17"
 		systemversion "10.0.16299.0"
