@@ -3,7 +3,7 @@ workspace "SnakeNeuroEvolution"
 
 	configurations
 	{
-		"Debug",
+		--"Debug",
 		"Release"
 	}
 
@@ -36,19 +36,9 @@ project "SnakeNeuroEvolution"
 		"lib/SFML-2.5.0-x64/lib"
 	}
 
-	filter "configurations:Debug"
-		symbols "On"
-		links 
-		{
-			"sfml-graphics-d.lib",
-			"sfml-window-d.lib",
-			"sfml-system-d.lib",
-			"sfml-main-d.lib",
-			"opengl32.lib"
-		}
-		
 
 	filter "configurations:Release"
+		runtime "Release"
 		optimize "On"
 		links 
 		{
@@ -58,6 +48,18 @@ project "SnakeNeuroEvolution"
 			"sfml-main.lib",
 			"opengl32.lib"
 		}
+
+	--[[filter "configurations:Debug"
+		runtime "Debug"
+		symbols "On"
+		links
+		{
+			"sfml-graphics-d.lib",
+			"sfml-window-d.lib",
+			"sfml-system-d.lib",
+			"sfml-main-d.lib",
+			"opengl32.lib"
+		}--]]
 		
 
 

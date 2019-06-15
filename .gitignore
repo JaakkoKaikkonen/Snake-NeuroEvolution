@@ -1,3 +1,4 @@
+premake5.exe
 /bin-int/*
 *.sln
 *.vcxproj
