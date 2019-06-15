@@ -73,4 +73,4 @@ project "SnakeNeuroEvolution"
 		
 	filter "system:windows"
 		cppdialect "C++17"
-		systemversion "10.0.16299.0"
+		systemversion "latest"
