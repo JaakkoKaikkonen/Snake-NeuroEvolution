@@ -1,5 +1,5 @@
 premake5.exe
-/bin-int/*
+/obj/*
 *.sln
 *.vcxproj
 *.vcxproj.filters

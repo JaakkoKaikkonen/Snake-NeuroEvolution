@@ -7,15 +7,15 @@ workspace "SnakeNeuroEvolution"
 		"Release"
 	}
 
-outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+outputdir = "%{cfg.buildcfg}-%{cfg.system}"
 
 project "SnakeNeuroEvolution"
 	location "SnakeNeuroEvolution"
 	kind "ConsoleApp"
 	language "C++"
 
-	targetdir ("exe/" .. outputdir)
-	objdir ("bin-int/" .. outputdir)
+	targetdir (outputdir)
+	objdir ("obj/" .. outputdir)
 
 	files
 	{
