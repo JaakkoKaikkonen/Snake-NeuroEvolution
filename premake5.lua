@@ -7,7 +7,7 @@ workspace "SnakeNeuroEvolution"
 		"Release"
 	}
 
-outputdir = "%{cfg.buildcfg}-%{cfg.system}"
+outputdir = "%{cfg.system}-%{cfg.buildcfg}"
 
 project "SnakeNeuroEvolution"
 	location "SnakeNeuroEvolution"
