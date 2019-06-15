@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{C0FF640D-2C14-8DBE-F595-301E616989EF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Animation.hpp" />
+    <ClInclude Include="src\AssetManager.hpp" />
+    <ClInclude Include="src\Collision.hpp" />
+    <ClInclude Include="src\DEFINITIONS.hpp" />
+    <ClInclude Include="src\Game.hpp" />
+    <ClInclude Include="src\GameState.hpp" />
+    <ClInclude Include="src\GeneticAlgorithm.hpp" />
+    <ClInclude Include="src\Matrix.hpp" />
+    <ClInclude Include="src\NeuralNetwork.hpp" />
+    <ClInclude Include="src\Snake.hpp" />
+    <ClInclude Include="src\State.hpp" />
+    <ClInclude Include="src\StateMachine.hpp" />
+    <ClInclude Include="src\Utility.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Animation.cpp" />
+    <ClCompile Include="src\AssetManager.cpp" />
+    <ClCompile Include="src\Collision.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GameState.cpp" />
+    <ClCompile Include="src\GeneticAlgorithm.cpp" />
+    <ClCompile Include="src\ImGui\imgui-SFML.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGui\imgui.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGui\imgui_demo.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGui\imgui_draw.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ImGui\imgui_widgets.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NeuralNetwork.cpp" />
+    <ClCompile Include="src\Snake.cpp" />
+    <ClCompile Include="src\StateMachine.cpp" />
+    <ClCompile Include="src\Utility.cpp" />
+    <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+</Project>
