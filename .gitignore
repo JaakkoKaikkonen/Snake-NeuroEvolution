@@ -1,5 +1,5 @@
 premake5.exe
-/windows-Debug/*
+/windows*/*
 /obj/*
 *.sln
 *.vcxproj
