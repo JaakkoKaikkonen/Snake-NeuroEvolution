@@ -14,7 +14,7 @@ project "SnakeNeuroEvolution"
 	kind "ConsoleApp"
 	language "C++"
 
-	targetdir ("bin/" .. outputdir)
+	targetdir ("exe/" .. outputdir)
 	objdir ("bin-int/" .. outputdir)
 
 	files
