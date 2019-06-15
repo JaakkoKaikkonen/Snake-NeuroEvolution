@@ -65,9 +65,9 @@ project "SnakeNeuroEvolution"
 			"sfml-main-d.lib",
 			"opengl32.lib",
 			"freetype.lib",
-		    "winmm.lib",
-		    "gdi32.lib",
-            "opengl32.lib"
+			"winmm.lib",
+			"gdi32.lib",
+			"opengl32.lib"
 		}
 		
 		
