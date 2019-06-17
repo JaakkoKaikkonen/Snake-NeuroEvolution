@@ -2,7 +2,7 @@
 
 #include "imgui.h"
 
-class ExampleAppLog
+class ImGuiLog
 {
 private:
     ImGuiTextBuffer Buf;
@@ -11,7 +11,7 @@ private:
     bool ScrollToBottom;
 
 public:
-    ExampleAppLog()
+    ImGuiLog()
     {
         AutoScroll = true;
         ScrollToBottom = false;

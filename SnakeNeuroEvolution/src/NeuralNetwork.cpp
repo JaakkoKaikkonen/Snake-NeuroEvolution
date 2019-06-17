@@ -56,7 +56,7 @@ void NeuralNetwork::randomize() {
 }
 
 
-void NeuralNetwork::save(char* snakeFileName) {
+void NeuralNetwork::save(char* snakeFileName, ImGuiLog& ImGuiLog) {
 
 	std::ofstream outputFile;
 
@@ -73,13 +73,13 @@ void NeuralNetwork::save(char* snakeFileName) {
 
 		outputFile.open("snake" + std::to_string(snakeIndex), std::ios::binary);
 
-		std::cout << "Save " << "\"" << "snake" + std::to_string(snakeIndex) << "\"" << std::endl;
+		ImGuiLog.AddLog(("Save \"snake" + std::to_string(snakeIndex) + "\"\n").c_str());
 
 	} else {
 
 		outputFile.open(snakeFileName, std::ios::binary);
 
-		std::cout << "Save " << "\"" << snakeFileName << "\"" << std::endl;
+		ImGuiLog.AddLog(("Save \"" + std::string(snakeFileName) + "\"\n").c_str());
 
 	}
 
@@ -93,7 +93,9 @@ void NeuralNetwork::save(char* snakeFileName) {
 		outputFile.close();
 
 	} else {
-		std::cout << "Problem with output file" << std::endl;
+
+		ImGuiLog.AddLog("Problem with output file");
+
 	}
 
 }

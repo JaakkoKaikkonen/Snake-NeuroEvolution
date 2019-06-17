@@ -136,12 +136,12 @@ namespace Game {
 				}
 			}
 			if (found) {
-				inputs.set(0, (1 / (i / TILESIZE)) * 100);
+				inputs.set(0, (1 / (i / TILESIZE)) * 100.0f);
 				break;
 			}
 		}
 		if (!found) {
-			inputs.set(0, 1);
+			inputs.set(0, 1.0f);
 		}
 		//Down
 		found = false;
@@ -154,12 +154,12 @@ namespace Game {
 				}
 			}
 			if (found) {
-				inputs.set(1, (1 / (i / TILESIZE)) * 100);
+				inputs.set(1, (1 / (i / TILESIZE)) * 100.0f);
 				break;
 			}
 		}
 		if (!found) {
-			inputs.set(1, 1);
+			inputs.set(1, 1.0f);
 		}
 		//Right
 		found = false;
@@ -172,12 +172,12 @@ namespace Game {
 				}
 			}
 			if (found) {
-				inputs.set(2, (1 / (i / TILESIZE)) * 100);
+				inputs.set(2, (1 / (i / TILESIZE)) * 100.0f);
 				break;
 			}
 		}
 		if (!found) {
-			inputs.set(2, 1);
+			inputs.set(2, 1.0f);
 		}
 		//Left
 		found = false;
@@ -190,12 +190,12 @@ namespace Game {
 				}
 			}
 			if (found) {
-				inputs.set(3, (1 / (i / TILESIZE)) * 100);
+				inputs.set(3, (1 / (i / TILESIZE)) * 100.0f);
 				break;
 			}
 		}
 		if (!found) {
-			inputs.set(3, 1);
+			inputs.set(3, 1.0f);
 		}
 		//Up-Right
 		/*found = false;
@@ -279,52 +279,52 @@ namespace Game {
 		for (int i = TILESIZE; i < SCREEN_WIDTH; i += TILESIZE) {
 			sf::Vector2f spot(snake[0].getPosition().x, snake[0].getPosition().y - i);
 			if (spot == dot) {
-				inputs.set(4, 100/*(1 / (i / TILESIZE)) * 100*/);
+				inputs.set(4, 100.0f/*(1 / (i / TILESIZE)) * 100*/);
 				found = true;
 				break;
 			}
 		}
 		if (!found) {
-			inputs.set(4, 1);
+			inputs.set(4, 1.0f);
 		}
 		//Down
 		found = false;
 		for (int i = TILESIZE; i < SCREEN_WIDTH; i += TILESIZE) {
 			sf::Vector2f spot(snake[0].getPosition().x, snake[0].getPosition().y + i);
 			if (spot == dot) {
-				inputs.set(5, 100/*(1 / (i / TILESIZE)) * 100*/);
+				inputs.set(5, 100.0f/*(1 / (i / TILESIZE)) * 100*/);
 				found = true;
 				break;
 			}
 		}
 		if (!found) {
-			inputs.set(5, 1);
+			inputs.set(5, 1.0f);
 		}
 		//Right
 		found = false;
 		for (int i = TILESIZE; i < SCREEN_WIDTH; i += TILESIZE) {
 			sf::Vector2f spot(snake[0].getPosition().x + i, snake[0].getPosition().y);
 			if (spot == dot) {
-				inputs.set(6, 100/*(1 / (i / TILESIZE)) * 100*/);
+				inputs.set(6, 100.0f/*(1 / (i / TILESIZE)) * 100*/);
 				found = true;
 				break;
 			}
 		}
 		if (!found) {
-			inputs.set(6, 1);
+			inputs.set(6, 1.0f);
 		}
 		//Left
 		found = false;
 		for (int i = TILESIZE; i < SCREEN_WIDTH; i += TILESIZE) {
 			sf::Vector2f spot(snake[0].getPosition().x - i, snake[0].getPosition().y);
 			if (spot == dot) {
-				inputs.set(7, 100/*(1 / (i / TILESIZE)) * 100*/);
+				inputs.set(7, 100.0f/*(1 / (i / TILESIZE)) * 100*/);
 				found = true;
 				break;
 			}
 		}
 		if (!found) {
-			inputs.set(7, 1);
+			inputs.set(7, 1.0f);
 		}
 		//Up-Right
 		/*found = false;
@@ -386,7 +386,7 @@ namespace Game {
 		for (int i = TILESIZE; i <= SCREEN_WIDTH + TILESIZE; i += TILESIZE) {
 			sf::Vector2f spot(snake[0].getPosition().x, snake[0].getPosition().y - i);
 			if (spot.y < 0) {
-				inputs.set(8, (1 / (i / TILESIZE)) * 2);
+				inputs.set(8, (1 / (i / TILESIZE)) * 2.0f);
 				break;
 			}
 		}
@@ -394,7 +394,7 @@ namespace Game {
 		for (int i = TILESIZE; i <= SCREEN_WIDTH + TILESIZE; i += TILESIZE) {
 			sf::Vector2f spot(snake[0].getPosition().x, snake[0].getPosition().y + i);
 			if (spot.y >= SCREEN_HEIGHT) {
-				inputs.set(9, (1 / (i / TILESIZE)) * 2);
+				inputs.set(9, (1 / (i / TILESIZE)) * 2.0f);
 				break;
 			}
 		}
@@ -402,7 +402,7 @@ namespace Game {
 		for (int i = TILESIZE; i <= SCREEN_WIDTH + TILESIZE; i += TILESIZE) {
 			sf::Vector2f spot(snake[0].getPosition().x + i, snake[0].getPosition().y);
 			if (spot.x >= SCREEN_WIDTH) {
-				inputs.set(10, (1 / (i / TILESIZE)) * 2);
+				inputs.set(10, (1 / (i / TILESIZE)) * 2.0f);
 				break;
 			}
 		}
@@ -410,7 +410,7 @@ namespace Game {
 		for (int i = TILESIZE; i <= SCREEN_WIDTH + TILESIZE; i += TILESIZE) {
 			sf::Vector2f spot(snake[0].getPosition().x - i, snake[0].getPosition().y);
 			if (spot.x < 0) {
-				inputs.set(11, (1 / (i / TILESIZE)) * 2);
+				inputs.set(11, (1 / (i / TILESIZE)) * 2.0f);
 				break;
 			}
 		}

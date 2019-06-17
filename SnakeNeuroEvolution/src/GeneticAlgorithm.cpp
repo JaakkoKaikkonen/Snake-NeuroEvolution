@@ -11,7 +11,7 @@ GeneticAlgorithm::GeneticAlgorithm(NeuralNetwork neuralNetwork, int generationSi
 
 	scores.reserve(generationSize);
 	for (int i = 0; i < generationSize; i++) {
-		scores.push_back(0.0f);
+		scores.push_back(0);
 	}
 }
 
@@ -130,38 +130,38 @@ void GeneticAlgorithm::crossOver() {
 
 	//Copy best one
 	int bestIndex = 0;
-	float highScore = 0;
-	for(int i = 0; i < population.size(); i++) {
+	int highScore = 0;
+	for (int i = 0; i < population.size(); i++) {
 		if(scores.at(i) > highScore) {
 			highScore = scores.at(i);
 			bestIndex = i;
 		}
 	}
 
-	for(int i = 0; i < population.size(); i++) {
+	for (int i = 0; i < population.size(); i++) {
 		population.at(i) = population.at(bestIndex);
 	}
 }
 
 void GeneticAlgorithm::mutate(float mutationRate) {
-	for(int i = 2000; i < population.size(); i++) {
-		for(int j = 0; j < population.at(i).weights1.rows * population.at(i).weights1.cols; j++) {
-			if(((float)rand() / (float)RAND_MAX) < mutationRate) {
+	for (int i = 2000; i < population.size(); i++) {
+		for (int j = 0; j < population.at(i).weights1.rows * population.at(i).weights1.cols; j++) {
+			if (((float)rand() / (float)RAND_MAX) < mutationRate) {
 				population.at(i).weights1.set(j, (((float)rand() / (float)RAND_MAX) * 2) - 1);
 			}
 		}
-		for(int j = 0; j < population.at(i).weights2.rows * population.at(i).weights2.cols; j++) {
-			if(((float)rand() / (float)RAND_MAX) < mutationRate) {
+		for (int j = 0; j < population.at(i).weights2.rows * population.at(i).weights2.cols; j++) {
+			if (((float)rand() / (float)RAND_MAX) < mutationRate) {
 				population.at(i).weights2.set(j, (((float)rand() / (float)RAND_MAX) * 2) - 1);
 			}
 		}
-		for(int j = 0; j < population.at(i).bias_hidden.rows * population.at(i).bias_hidden.cols; j++) {
-			if(((float)rand() / (float)RAND_MAX) < mutationRate) {
+		for (int j = 0; j < population.at(i).bias_hidden.rows * population.at(i).bias_hidden.cols; j++) {
+			if (((float)rand() / (float)RAND_MAX) < mutationRate) {
 				population.at(i).bias_hidden.set(j, (((float)rand() / (float)RAND_MAX) * 2) - 1);
 			}
 		}
-		for(int j = 0; j < population.at(i).bias_output.rows * population.at(i).bias_output.cols; j++) {
-			if(((float)rand() / (float)RAND_MAX) < mutationRate) {
+		for (int j = 0; j < population.at(i).bias_output.rows * population.at(i).bias_output.cols; j++) {
+			if (((float)rand() / (float)RAND_MAX) < mutationRate) {
 				population.at(i).bias_output.set(j, (((float)rand() / (float)RAND_MAX) * 2) - 1);
 			}
 		}
@@ -169,8 +169,9 @@ void GeneticAlgorithm::mutate(float mutationRate) {
 }
 
 
-void GeneticAlgorithm::loadFromFile(char* snakeFileName) {
-	std::cout << "Load " << "\"" << snakeFileName << "\"" << std::endl;
+void GeneticAlgorithm::loadFromFile(char* snakeFileName, ImGuiLog& ImGuiLog) {
+
+	ImGuiLog.AddLog(("Load \"" + std::string(snakeFileName) + "\"\n").c_str());
 
 	std::ifstream f(snakeFileName, std::ios::binary);
 
@@ -199,7 +200,7 @@ void GeneticAlgorithm::loadFromFile(char* snakeFileName) {
 		scores.assign(scores.size(), 0);
 
 	} else {
-		std::cout << "Bad file" << std::endl;
+		ImGuiLog.AddLog("Bad file\n");
 	}
 
 }

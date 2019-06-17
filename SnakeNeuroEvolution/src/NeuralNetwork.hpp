@@ -1,6 +1,7 @@
 #pragma once
 #include "Matrix.hpp"
 #include <fstream>
+#include "ImGuiLog.h"
 
 class NeuralNetwork
 {
@@ -14,7 +15,7 @@ public:
 
 	void randomize();
 
-	void save(char* snakeFileName);
+	void save(char* snakeFileName, ImGuiLog& ImGuiLog);
 
 public:
 	Matrix<float> weights1;

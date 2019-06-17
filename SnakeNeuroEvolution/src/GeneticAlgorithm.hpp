@@ -2,6 +2,8 @@
 #include "NeuralNetwork.hpp"
 #include <vector>
 
+#include "ImGuiLog.h"
+
 class GeneticAlgorithm
 {
 public:
@@ -10,10 +12,10 @@ public:
 	void crossOver();
 	void mutate(float mutationRate);
 
-	void loadFromFile(char* snakeFileName);
+	void loadFromFile(char* snakeFileName, ImGuiLog& ImGuiLog);
 
 public:
 	std::vector<NeuralNetwork> population;
-	std::vector<float> scores;
+	std::vector<int> scores;
 };
 

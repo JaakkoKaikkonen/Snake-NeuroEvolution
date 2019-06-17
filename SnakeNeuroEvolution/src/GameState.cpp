@@ -29,7 +29,7 @@ namespace Game {
 		score = 0;
 		timeSinceFood = 0;
 
-		//AI/////////////////////////////////////////////////////////////////////// Record score 122
+		//AI/////////////////////////////////////////////////////////////////////// Record score 138
 		if (brainIndex == generationSize) {
 			brainIndex = 0;
 
@@ -38,12 +38,9 @@ namespace Game {
 
 
 			//ImGui///////////////////////////////////////////////////////////////////////////////////////
-			if (generationCount > 1) {
-				ImGuiLog.AddLog("\n");
-			}
 			ImGuiLog.AddLog(("BEST SCORE: " + std::to_string(bestScore) + "\n").c_str());
 			ImGuiLog.AddLog(("GENERATION: " + std::to_string(generationCount) + "\n").c_str());
-			ImGuiLog.AddLog(("GENERATION BEST SCORE: " + std::to_string(generationBestScore)).c_str());
+			ImGuiLog.AddLog(("GENERATION BEST SCORE: " + std::to_string(generationBestScore) + "\n").c_str());
 			///////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -166,11 +163,8 @@ namespace Game {
 		//ImGui///////////////////////////////////////////////////////////////
 		ImGui::SFML::Update(data->window, sf::seconds(dt));
 
+
 		//ImGui window 1
-		ImGuiLog.Draw("Logs");
-
-
-		//ImGui window 2
 		ImGui::Begin("Settings");
 
 		ImGui::Text("File name");
@@ -178,13 +172,13 @@ namespace Game {
 		ImGui::InputText("", snakeFileName, 255);
 
 		if (ImGui::Button("Load")) {
-			GA.loadFromFile(snakeFileName);
+			GA.loadFromFile(snakeFileName, ImGuiLog);
 		}
 
 		 ImGui::SameLine();
 
 		if (ImGui::Button("Save")) {
-			GA.population.at(0).save(snakeFileName);
+			GA.population.at(0).save(snakeFileName, ImGuiLog);
 		}
 
 		ImGui::Separator();
@@ -193,6 +187,9 @@ namespace Game {
 
         ImGui::End();
 		/////////////////////////////////////////////////////////////////////
+
+		//ImGui window 2
+		ImGuiLog.Draw("Logs");
 
 
 		data->window.clear(sf::Color(51, 51, 51));
