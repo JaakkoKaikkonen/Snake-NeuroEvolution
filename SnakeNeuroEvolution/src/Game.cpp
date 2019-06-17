@@ -8,16 +8,16 @@ namespace Game {
 
 	Game::Game(int width, int height, std::string title) {
 
-		/*sf::Image icon;
-		icon.loadFromFile(TOP_ICON_FILEPATH);*/
+		sf::Image icon;
+		icon.loadFromFile(TOP_ICON_FILEPATH);
 
-		_data->window.create(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar);
-		//_data->window.setVerticalSyncEnabled(true);
-		//_data->window.setFramerateLimit(60);
+		data->window.create(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar);
+		//data->window.setVerticalSyncEnabled(true);
+		//data->window.setFramerateLimit(60);
 
-		_data->window.setPosition(sf::Vector2i(500, 200));
+		data->window.setPosition(sf::Vector2i(500, 200));
 
-		//_data->window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+		data->window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 		srand(time(NULL));
 
@@ -29,11 +29,11 @@ namespace Game {
 		//Sounds
 
 		//Fonts
-		_data->assets.loadFont("Font", FONT_FILEPATH);
+		data->assets.loadFont("Font", FONT_FILEPATH);
 
 		//-------------------------------------------------------------------------------------
 
-		_data->machine.addState(stateRef(new GameState(_data)), true);
+		data->machine.addState(stateRef(new GameState(data)), true);
 
 		this->run();
 	}
@@ -41,7 +41,7 @@ namespace Game {
 	void Game::run() {
 		float newTime, frameTime;
 
-		float currentTime = this->_clock.getElapsedTime().asSeconds();
+		float currentTime = this->clock.getElapsedTime().asSeconds();
 
 		float accumulator = dt;
 
@@ -52,11 +52,11 @@ namespace Game {
 		
 
 
-		while (this->_data->window.isOpen()) {
+		while (this->data->window.isOpen()) {
 
-			this->_data->machine.processStateChanges();
+			this->data->machine.processStateChanges();
 
-			newTime = this->_clock.getElapsedTime().asSeconds();
+			newTime = this->clock.getElapsedTime().asSeconds();
 
 			frameTime = newTime - currentTime;
 
@@ -70,17 +70,17 @@ namespace Game {
 
 			while (accumulator >= dt) {
 
-				this->_data->machine.getActiveState()->draw(dt, &fast);
+				this->data->machine.getActiveState()->draw(dt, &fast);
 
-				this->_data->machine.getActiveState()->handleInput();
-				this->_data->machine.getActiveState()->update();
+				this->data->machine.getActiveState()->handleInput();
+				this->data->machine.getActiveState()->update();
 			
 				accumulator -= dt;
 			}
 
 			if (fast) {
-				this->_data->machine.getActiveState()->handleInput();
-				this->_data->machine.getActiveState()->update();
+				this->data->machine.getActiveState()->handleInput();
+				this->data->machine.getActiveState()->update();
 			}
 			
 			

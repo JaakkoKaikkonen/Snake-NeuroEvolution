@@ -6,12 +6,12 @@ namespace Game {
 		sf::Font font;
 
 		if (font.loadFromFile(fileName)) {
-			this->_fonts[name] = font;
+			this->fonts[name] = font;
 		}
 	}
 
 	sf::Font& AssetManager::getFont(std::string name) {
-		return this->_fonts.at(name);
+		return this->fonts.at(name);
 	}
 
 }

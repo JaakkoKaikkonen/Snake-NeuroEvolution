@@ -23,27 +23,27 @@ namespace Game {
 
 		void draw();
 
-		bool dead() { return _dead; }
+		bool isDead() { return dead; }
 
 		//AI//////////////////////////
 		Matrix<float> getInputs(sf::Vector2f dot);
 		/////////////////////////////
 
 	private:
-		gameDataRef _data;
+		gameDataRef data;
 
-		std::vector<sf::RectangleShape> _snake;
+		std::vector<sf::RectangleShape> snake;
 
-		float _speed = TILESIZE;
+		float speed = TILESIZE;
 
-		sf::Vector2f _moveVector;
+		sf::Vector2f moveVector;
 
-		Dir _dir = Dir::Up;
+		Dir dir = Dir::Up;
 
 		sf::Vector2f previousPos1;
 		sf::Vector2f previousPos2;
 
-		bool _dead = false;
+		bool dead = false;
 
 	};
 

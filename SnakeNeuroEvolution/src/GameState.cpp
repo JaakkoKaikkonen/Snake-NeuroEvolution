@@ -8,26 +8,25 @@
 
 namespace Game {
 
-	GameState::GameState(gameDataRef data)
-		: _data(data), _dot(sf::Vector2f(TILESIZE, TILESIZE)), _gameOverText("Game Over", _data->assets.getFont("Font")),
+	GameState::GameState(gameDataRef _data)
+		: data(_data), dot(sf::Vector2f(TILESIZE, TILESIZE)), gameOverText("Game Over", data->assets.getFont("Font")),
 		  GA(NeuralNetwork(12, 24, 4), generationSize),
 		  inputs(12, 1)
 	{
 		//ImGui/////////////////////////////////////////////////////////////
-		ImGui::SFML::Init(_data->window);
+		ImGui::SFML::Init(data->window);
 		////////////////////////////////////////////////////////////////////
 
-		_dot.setFillColor(sf::Color::Red);
+		dot.setFillColor(sf::Color::Red);
 
-		_gameOverText.setPosition(SCREEN_WIDTH / 2 - _gameOverText.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.25);
+		gameOverText.setPosition(SCREEN_WIDTH / 2 - gameOverText.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.25);
 	}
 
 	void GameState::init() {
 
-		//std::cout << "Game state" << std::endl;
-		_dot.setPosition((float)(rand() % (SCREEN_WIDTH / TILESIZE) * TILESIZE), (float)(rand() % (SCREEN_HEIGHT / TILESIZE) * TILESIZE));
-		_snake = new Snake(_data);
-		_score = 0;
+		dot.setPosition((float)(rand() % (SCREEN_WIDTH / TILESIZE) * TILESIZE), (float)(rand() % (SCREEN_HEIGHT / TILESIZE) * TILESIZE));
+		snake = new Snake(data);
+		score = 0;
 		timeSinceFood = 0;
 
 		//AI/////////////////////////////////////////////////////////////////////// Record score 122
@@ -37,79 +36,83 @@ namespace Game {
 			GA.crossOver();
 			GA.mutate(0.01f);
 
-			
-			std::cout << "GENERATION: " << generationCount << std::endl;
-			std::cout << "GENERATION BEST SCORE: " << _generationBestScore << std::endl;
-			std::cout << "BEST_SCORE: " << _bestScore << std::endl;
+
+			//ImGui///////////////////////////////////////////////////////////////////////////////////////
+			if (generationCount > 1) {
+				ImGuiLog.AddLog("\n");
+			}
+			ImGuiLog.AddLog(("BEST SCORE: " + std::to_string(bestScore) + "\n").c_str());
+			ImGuiLog.AddLog(("GENERATION: " + std::to_string(generationCount) + "\n").c_str());
+			ImGuiLog.AddLog(("GENERATION BEST SCORE: " + std::to_string(generationBestScore)).c_str());
+			///////////////////////////////////////////////////////////////////////////////////////////////
 
 
 			generationCount++;
-			_generationBestScore = 0;
+			generationBestScore = 0;
 		}
-
-		//std::cout << "brain_index: " << brainIndex << std::endl;
 		///////////////////////////////////////////////////////////////////////////
+
 	}
 
 	void GameState::handleInput() {
 		sf::Event event;
-		while (_data->window.pollEvent(event)) {
+		while (data->window.pollEvent(event)) {
 			//ImGui///////////////////////////////////////////////
 			ImGui::SFML::ProcessEvent(event);
 			/////////////////////////////////////////////////////
 
 			if (sf::Event::Closed == event.type) {
-				_data->window.close();
+				data->window.close();
 			}
 		}
 
 
 		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-			_dir = Dir::Up;
+			dir = Dir::Up;
 		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-			_dir = Dir::Down;
+			dir = Dir::Down;
 		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-			_dir = Dir::Right;
+			dir = Dir::Right;
 		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-			_dir = Dir::Left;
+			dir = Dir::Left;
 		}*/
 
 
-		if (_moveTimer >= moveDelay) {
+		if (moveTimer >= moveDelay) {
 
 			timeSinceFood++;
 
 			//AI//////////////////////////////////////////////////////////////////
-			inputs = _snake->getInputs(_dot.getPosition());
+			inputs = snake->getInputs(dot.getPosition());
 
-			/*std::cout << "Inputs: " << std::endl;
-			for(int i = 0; i < 12; i++) {
-				std::cout << inputs.get(i) << std::endl;
-			}*/
+			//std::cout << "Inputs: " << std::endl;
+			//for(int i = 0; i < 12; i++) {
+			//	std::cout << inputs.get(i) << std::endl;
+			//}
 
 			int output = GA.population.at(brainIndex).predict(inputs);
 			//int output = (rand() % 4) + 1;
 
 			switch(output) {
 				case 1:
-				_dir = Dir::Up;
+				dir = Dir::Up;
 				break;
 				case 2:
-				_dir = Dir::Down;
+				dir = Dir::Down;
 				break;
 				case 3:
-				_dir = Dir::Right;
+				dir = Dir::Right;
 				break;
 				case 4:
-				_dir = Dir::Left;
+				dir = Dir::Left;
 				break;
 				default:
 				std::cout << "Snake gave bad output" << std::endl;
 			}
 			/////////////////////////////////////////////////////////////////
 
-			_snake->move(_dir);
-			_moveTimer = 0;
+			snake->move(dir);
+			moveTimer = 0;
 
 		}
 
@@ -118,38 +121,38 @@ namespace Game {
 	void GameState::update() {
 
 
-		if (!_snake->dead()) {
+		if (!snake->isDead()) {
 
-			_moveTimer++;
-			if (_moveTimer >= moveDelay) {
-				_snake->update();
+			moveTimer++;
+			if (moveTimer >= moveDelay) {
+				snake->update();
 			}
 
-			if (_snake->ateDot(_dot.getPosition())) {
-				_score++;
+			if (snake->ateDot(dot.getPosition())) {
+				score++;
 				timeSinceFood = 0;
 				do {
-					_dot.setPosition((float)(rand() % (SCREEN_WIDTH / TILESIZE) * TILESIZE), (float)(rand() % (SCREEN_HEIGHT / TILESIZE) * TILESIZE));
-				} while (_snake->hitDot(_dot.getPosition()));
+					dot.setPosition((float)(rand() % (SCREEN_WIDTH / TILESIZE) * TILESIZE), (float)(rand() % (SCREEN_HEIGHT / TILESIZE) * TILESIZE));
+				} while (snake->hitDot(dot.getPosition()));
 			}
 
-		} else if (!_restart){
-			_restart = true;
-			_restartTimer.restart();
+		} else if (!restart){
+			restart = true;
+			restartTimer.restart();
 		}
 
-		if ((_restart || timeSinceFood > 700) && _restartTimer.getElapsedTime().asSeconds() > 0.0f) {
-			_restart = false;
-			delete _snake;
+		if ((restart || timeSinceFood > 700) && restartTimer.getElapsedTime().asSeconds() > 0.0f) {
+			restart = false;
+			delete snake;
 
 			//AI////////////////////////////////////////
-			if (_score > _bestScore) {
-				_bestScore = _score;
+			if (score > bestScore) {
+				bestScore = score;
 			}
-			if (_score > _generationBestScore) {
-				_generationBestScore = _score;
+			if (score > generationBestScore) {
+				generationBestScore = score;
 			}
-			GA.scores.at(brainIndex) = _score;
+			GA.scores.at(brainIndex) = score;
 			brainIndex++;
 			///////////////////////////////////////////
 
@@ -161,11 +164,14 @@ namespace Game {
 	void GameState::draw(float dt, bool* fast) {
 
 		//ImGui///////////////////////////////////////////////////////////////
-		ImGui::SFML::Update(_data->window, sf::seconds(dt));
+		ImGui::SFML::Update(data->window, sf::seconds(dt));
 
+		//ImGui window 1
+		ImGuiLog.Draw("Logs");
+
+
+		//ImGui window 2
 		ImGui::Begin("Settings");
-
-		ImGui::Checkbox("Fast", fast);
 
 		ImGui::Text("File name");
 
@@ -175,30 +181,36 @@ namespace Game {
 			GA.loadFromFile(snakeFileName);
 		}
 
+		 ImGui::SameLine();
+
 		if (ImGui::Button("Save")) {
 			GA.population.at(0).save(snakeFileName);
 		}
+
+		ImGui::Separator();
+
+		ImGui::Checkbox("Fast", fast);
 
         ImGui::End();
 		/////////////////////////////////////////////////////////////////////
 
 
-		_data->window.clear(sf::Color(51, 51, 51));
+		data->window.clear(sf::Color(51, 51, 51));
 		
-		_snake->draw();
+		snake->draw();
 		
-		_data->window.draw(_dot);
+		data->window.draw(dot);
 
 
-		if (_restart) {
-			_data->window.draw(_gameOverText);
+		if (restart) {
+			data->window.draw(gameOverText);
 		}
 
 		//ImGui/////////////////////////////////
-		ImGui::SFML::Render(_data->window);
+		ImGui::SFML::Render(data->window);
 		///////////////////////////////////////
 
-		_data->window.display();
+		data->window.display();
 	}
 
 

@@ -16,7 +16,7 @@ namespace Game {
 		sf::Font& getFont(std::string name);
 
 	private:
-		std::map<std::string, sf::Font> _fonts;
+		std::map<std::string, sf::Font> fonts;
 
 	};
 

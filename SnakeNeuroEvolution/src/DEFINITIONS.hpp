@@ -7,6 +7,8 @@
 
 #define FONT_FILEPATH "Resources/Fonts/font.ttf"
 
+#define TOP_ICON_FILEPATH "Resources/Images/topIcon.png"
+
 #define TILESIZE 25
 
 

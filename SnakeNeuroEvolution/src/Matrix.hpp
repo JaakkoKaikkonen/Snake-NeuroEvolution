@@ -149,9 +149,9 @@ public:
 		}
 	}
 
-	void fill(T * _data) {
+	void fill(T * data) {
 		delete[] data;
-		data = _data;
+		data = data;
 	}
 
 	void identity() {

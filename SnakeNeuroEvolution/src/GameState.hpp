@@ -10,6 +10,7 @@
 #include "GeneticAlgorithm.hpp"
 #include "Matrix.hpp"
 
+#include "ImGuiLog.h"
 
 namespace Game {
 
@@ -25,21 +26,21 @@ namespace Game {
 		void draw(float dt, bool* fast);
 
 	private:
-		gameDataRef _data;
+		gameDataRef data;
 
-		Snake* _snake;
+		Snake* snake;
 
-		sf::RectangleShape _dot;
+		sf::RectangleShape dot;
 
-		int _moveTimer = 0;
+		int moveTimer = 0;
 
-		Dir _dir;
+		Dir dir;
 
-		sf::Text _gameOverText;
+		sf::Text gameOverText;
 
-		bool _restart = false;
+		bool restart = false;
 
-		sf::Clock _restartTimer;
+		sf::Clock restartTimer;
 
 		int timeSinceFood = 0;
 
@@ -57,14 +58,18 @@ namespace Game {
 
 		int generationCount = 1;
 
-		int _score = 0;
+		int score = 0;
 
-		int _bestScore = 0;
+		int bestScore = 0;
 
-		int _generationBestScore = 0;
+		int generationBestScore = 0;
 		////////////////////////////////////////////////////
 
+		//ImGui/////////////////////////////////////////////
 		char snakeFileName[255] = "";
+
+		ExampleAppLog ImGuiLog;
+		///////////////////////////////////////////////////
 
 	};
 

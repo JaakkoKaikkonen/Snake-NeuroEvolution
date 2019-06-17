@@ -11,7 +11,7 @@ outputdir = "%{cfg.system}-%{cfg.buildcfg}"
 
 project "SnakeNeuroEvolution"
 	location "SnakeNeuroEvolution"
-	kind "ConsoleApp"
+	kind "WindowedApp"
 	language "C++"
 
 	targetdir (outputdir)
