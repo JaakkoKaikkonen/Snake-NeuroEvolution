@@ -45,12 +45,9 @@ namespace Game {
 
 		float accumulator = dt;
 
-		float accumulator2 = dt;
-
 		float interpolation = 0.0f;
 
 		
-
 
 		while (this->data->window.isOpen()) {
 

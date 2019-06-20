@@ -33,6 +33,8 @@ namespace Game {
 
 		food.setFillColor(sf::Color::Red);
 
+		gameOverText.setOutlineThickness(1);
+		gameOverText.setOutlineColor(sf::Color::Black);
 		gameOverText.setPosition(SCREEN_WIDTH / 2 - gameOverText.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.25);
 	}
 

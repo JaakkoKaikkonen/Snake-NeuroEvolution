@@ -34,8 +34,6 @@ namespace Game {
 
 		std::vector<sf::RectangleShape> snake;
 
-		float speed = TILESIZE;
-
 		sf::Vector2f moveVector;
 
 		Dir dir = Dir::Up;

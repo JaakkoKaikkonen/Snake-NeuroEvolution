@@ -25,16 +25,16 @@ namespace Game {
 		previousPos1 = snake[0].getPosition();
 		switch(dir) {
 			case Dir::Up:
-			snake[0].move(sf::Vector2f(0.0f, -speed));
+			snake[0].move(sf::Vector2f(0.0f, -TILESIZE));
 			break;
 			case Dir::Down:
-			snake[0].move(sf::Vector2f(0.0f, speed));
+			snake[0].move(sf::Vector2f(0.0f, TILESIZE));
 			break;
 			case Dir::Right:
-			snake[0].move(sf::Vector2f(speed, 0.0f));
+			snake[0].move(sf::Vector2f(TILESIZE, 0.0f));
 			break;
 			case Dir::Left:
-			snake[0].move(sf::Vector2f(-speed, 0.0f));
+			snake[0].move(sf::Vector2f(-TILESIZE, 0.0f));
 		}
 		
 		//Collision//////////////////
