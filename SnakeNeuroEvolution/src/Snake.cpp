@@ -62,8 +62,8 @@ namespace Game {
 
 	}
 
-	bool Snake::ateDot(sf::Vector2f dot) {
-		if (snake[0].getPosition() == dot) {
+	bool Snake::ateFood(sf::Vector2f foodPos) {
+		if (snake[0].getPosition() == foodPos) {
 			snake.emplace_back(sf::RectangleShape(sf::Vector2f(TILESIZE, TILESIZE)));
 			snake[snake.size() - 1].setPosition(previousPos1);
 			snake[snake.size() - 1].setFillColor(sf::Color::White);
@@ -75,9 +75,9 @@ namespace Game {
 		}
 	}
 
-	bool Snake::hitDot(sf::Vector2f dot) {
+	bool Snake::hitDot(sf::Vector2f foodPos) {
 		for (int i = 0; i < snake.size(); i++) {
-			if (snake[i].getPosition() == dot) {
+			if (snake[i].getPosition() == foodPos) {
 				return true;
 			}
 		}
@@ -120,8 +120,8 @@ namespace Game {
 
 
 	//AI///////////////////////////////////////////////////////////////////
-	Matrix<float> Snake::getInputs(sf::Vector2f dot) {
-		Matrix<float> inputs(12, 1);
+	Matrix<float> Snake::getInputs(sf::Vector2f foodPos) {
+		Matrix<float> inputs(NUM_OF_INPUTS, 1);
 
 
 		//Distance to snake
@@ -278,7 +278,7 @@ namespace Game {
 		found = false;
 		for (int i = TILESIZE; i < SCREEN_WIDTH; i += TILESIZE) {
 			sf::Vector2f spot(snake[0].getPosition().x, snake[0].getPosition().y - i);
-			if (spot == dot) {
+			if (spot == foodPos) {
 				inputs.set(4, 100.0f/*(1 / (i / TILESIZE)) * 100*/);
 				found = true;
 				break;
@@ -291,7 +291,7 @@ namespace Game {
 		found = false;
 		for (int i = TILESIZE; i < SCREEN_WIDTH; i += TILESIZE) {
 			sf::Vector2f spot(snake[0].getPosition().x, snake[0].getPosition().y + i);
-			if (spot == dot) {
+			if (spot == foodPos) {
 				inputs.set(5, 100.0f/*(1 / (i / TILESIZE)) * 100*/);
 				found = true;
 				break;
@@ -304,7 +304,7 @@ namespace Game {
 		found = false;
 		for (int i = TILESIZE; i < SCREEN_WIDTH; i += TILESIZE) {
 			sf::Vector2f spot(snake[0].getPosition().x + i, snake[0].getPosition().y);
-			if (spot == dot) {
+			if (spot == foodPos) {
 				inputs.set(6, 100.0f/*(1 / (i / TILESIZE)) * 100*/);
 				found = true;
 				break;
@@ -317,7 +317,7 @@ namespace Game {
 		found = false;
 		for (int i = TILESIZE; i < SCREEN_WIDTH; i += TILESIZE) {
 			sf::Vector2f spot(snake[0].getPosition().x - i, snake[0].getPosition().y);
-			if (spot == dot) {
+			if (spot == foodPos) {
 				inputs.set(7, 100.0f/*(1 / (i / TILESIZE)) * 100*/);
 				found = true;
 				break;
@@ -330,7 +330,7 @@ namespace Game {
 		/*found = false;
 		for (int i = TILESIZE; i < SCREEN_WIDTH; i += TILESIZE) {
 			sf::Vector2f spot(snake[0].getPosition().x + i, snake[0].getPosition().y - i);
-			if (spot == dot) {
+			if (spot == food) {
 				inputs.set(12, i / TILESIZE);
 				found = true;
 				break;
@@ -343,7 +343,7 @@ namespace Game {
 		found = false;
 		for (int i = TILESIZE; i < SCREEN_WIDTH; i += TILESIZE) {
 			sf::Vector2f spot(snake[0].getPosition().x + i, snake[0].getPosition().y + i);
-			if (spot == dot) {
+			if (spot == food) {
 				inputs.set(13, i / TILESIZE);
 				found = true;
 				break;
@@ -356,7 +356,7 @@ namespace Game {
 		found = false;
 		for (int i = TILESIZE; i < SCREEN_WIDTH; i += TILESIZE) {
 			sf::Vector2f spot(snake[0].getPosition().x - i, snake[0].getPosition().y + i);
-			if (spot == dot) {
+			if (spot == food) {
 				inputs.set(14, i / TILESIZE);
 				found = true;
 				break;
@@ -369,7 +369,7 @@ namespace Game {
 		found = false;
 		for (int i = TILESIZE; i < SCREEN_WIDTH; i += TILESIZE) {
 			sf::Vector2f spot(snake[0].getPosition().x - i, snake[0].getPosition().y - i);
-			if (spot == dot) {
+			if (spot == food) {
 				inputs.set(15, i / TILESIZE);
 				found = true;
 				break;

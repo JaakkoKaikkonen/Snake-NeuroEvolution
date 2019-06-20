@@ -13,3 +13,9 @@
 
 
 enum class Dir { Up, Down, Right, Left };
+
+
+
+#define NUM_OF_INPUTS 12
+#define NUM_OF_HIDDEN 24
+#define NUM_OF_OUTPUT 4

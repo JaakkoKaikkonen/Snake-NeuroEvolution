@@ -94,7 +94,7 @@ void NeuralNetwork::save(char* snakeFileName, ImGuiLog& ImGuiLog) {
 
 	} else {
 
-		ImGuiLog.AddLog("Problem with output file");
+		ImGuiLog.AddLog("Problem with output file\n");
 
 	}
 

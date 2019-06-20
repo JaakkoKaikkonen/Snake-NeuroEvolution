@@ -30,7 +30,7 @@ namespace Game {
 
 		Snake* snake;
 
-		sf::RectangleShape dot;
+		sf::RectangleShape food;
 
 		int moveTimer = 0;
 
@@ -60,9 +60,16 @@ namespace Game {
 
 		int score = 0;
 
-		int bestScore = 0;
+		int highScore = 0;
 
 		int generationBestScore = 0;
+
+		int allTimeHighScore = 0;
+
+		sf::Vector2f* foodPositions;
+
+		bool playBestRun = false;
+		bool playingBestRun = false;
 		////////////////////////////////////////////////////
 
 		//ImGui/////////////////////////////////////////////

@@ -15,9 +15,9 @@ namespace Game {
 
 		void update();
 
-		bool ateDot(sf::Vector2f dot);
+		bool ateFood(sf::Vector2f food);
 
-		bool hitDot(sf::Vector2f dot);
+		bool hitDot(sf::Vector2f food);
 
 		void move(Dir dir);
 
@@ -26,7 +26,7 @@ namespace Game {
 		bool isDead() { return dead; }
 
 		//AI//////////////////////////
-		Matrix<float> getInputs(sf::Vector2f dot);
+		Matrix<float> getInputs(sf::Vector2f food);
 		/////////////////////////////
 
 	private:

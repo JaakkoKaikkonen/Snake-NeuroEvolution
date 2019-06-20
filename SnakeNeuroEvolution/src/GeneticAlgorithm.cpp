@@ -175,7 +175,7 @@ void GeneticAlgorithm::loadFromFile(char* snakeFileName, ImGuiLog& ImGuiLog) {
 
 	std::ifstream f(snakeFileName, std::ios::binary);
 
-	if (f.is_open()) {
+	if (f.good()) {
 
 		Matrix<float> loaded_weights1(population.at(0).weights1.rows, population.at(0).weights1.cols);
 		Matrix<float> loaded_weights2(population.at(0).weights2.rows, population.at(0).weights2.cols);
@@ -183,10 +183,10 @@ void GeneticAlgorithm::loadFromFile(char* snakeFileName, ImGuiLog& ImGuiLog) {
 		Matrix<float> loaded_bias_output(population.at(0).bias_output.rows, population.at(0).bias_output.cols);
 
 
-		f.read(reinterpret_cast<char *>(loaded_weights1.data), (loaded_weights1.rows * loaded_weights1.cols) * sizeof(float));
-		f.read(reinterpret_cast<char *>(loaded_weights2.data), (loaded_weights2.rows * loaded_weights2.cols) * sizeof(float));
-		f.read(reinterpret_cast<char *>(loaded_bias_hidden.data), (loaded_bias_hidden.rows) * sizeof(float));
-		f.read(reinterpret_cast<char *>(loaded_bias_output.data), (loaded_bias_output.rows) * sizeof(float));
+		f.read(reinterpret_cast<char*>(loaded_weights1.data), (loaded_weights1.rows * loaded_weights1.cols) * sizeof(float));
+		f.read(reinterpret_cast<char*>(loaded_weights2.data), (loaded_weights2.rows * loaded_weights2.cols) * sizeof(float));
+		f.read(reinterpret_cast<char*>(loaded_bias_hidden.data), (loaded_bias_hidden.rows) * sizeof(float));
+		f.read(reinterpret_cast<char*>(loaded_bias_output.data), (loaded_bias_output.rows) * sizeof(float));
 
 		f.close();
 
@@ -202,5 +202,6 @@ void GeneticAlgorithm::loadFromFile(char* snakeFileName, ImGuiLog& ImGuiLog) {
 	} else {
 		ImGuiLog.AddLog("Bad file\n");
 	}
+	
 
 }
