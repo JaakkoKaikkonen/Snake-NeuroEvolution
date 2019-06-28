@@ -254,7 +254,7 @@ namespace Game {
 		ImGui::Text(("HighScore: " + std::to_string(highScore)).c_str());
 		ImGui::SameLine();
 		ImGui::Text(("Score: " + std::to_string(score)).c_str());
-        ImGui::End();
+		ImGui::End();
 
 		//ImGui window 3
 		ImGui::Begin("Settings");
@@ -285,7 +285,7 @@ namespace Game {
 
 		ImGui::Checkbox("Play best run", &playBestRun);
 
-        ImGui::End();
+		ImGui::End();
 		/////////////////////////////////////////////////////////////////////
 
 		
