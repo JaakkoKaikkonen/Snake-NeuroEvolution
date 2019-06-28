@@ -30,7 +30,7 @@ public:
 		rows = matrix.rows;
 		cols = matrix.cols;
 
-		for(int i = 0; i < rows * cols; i++) {
+		for (int i = 0; i < rows * cols; i++) {
 			this->data[i] = matrix.data[i];
 		}
 	}
@@ -61,10 +61,10 @@ public:
 
 		Matrix result(matrix1.rows, matrix2.cols);
 
-		for(int m1_row = 1; m1_row <= matrix1.rows; m1_row++) {
-			for(int m2_col = 1; m2_col <= matrix2.cols; m2_col++) {
+		for (int m1_row = 1; m1_row <= matrix1.rows; m1_row++) {
+			for (int m2_col = 1; m2_col <= matrix2.cols; m2_col++) {
 				T val = 0;
-				for(int i = 1; i <= matrix1.cols; i++) {
+				for (int i = 1; i <= matrix1.cols; i++) {
 					val += matrix1.get(m1_row, i) * matrix2.get(i, m2_col);
 				}
 				result.set(m1_row, m2_col, val);
@@ -84,8 +84,8 @@ public:
 
 		Matrix result(matrix1.rows, matrix1.cols);
 
-		for(int i = 1; i <= matrix1.rows; i++) {
-			for(int j = 1; j <= matrix1.cols; j++) {
+		for (int i = 1; i <= matrix1.rows; i++) {
+			for (int j = 1; j <= matrix1.cols; j++) {
 				result.set(i, j, matrix1.get(i, j) * matrix2.get(i, j));
 			}
 		}
@@ -97,8 +97,8 @@ public:
 
 		Matrix result(matrix1.rows, matrix1.cols);
 
-		for(int i = 1; i <= matrix1.rows; i++) {
-			for(int j = 1; j <= matrix1.cols; j++) {
+		for (int i = 1; i <= matrix1.rows; i++) {
+			for (int j = 1; j <= matrix1.cols; j++) {
 				result.set(i, j, matrix1.get(i, j) + matrix2.get(i, j));
 			}
 		}
@@ -116,8 +116,8 @@ public:
 
 		Matrix result(matrix1.rows, matrix1.cols);
 
-		for(int i = 1; i <= matrix1.rows; i++) {
-			for(int j = 1; j <= matrix1.cols; j++) {
+		for (int i = 1; i <= matrix1.rows; i++) {
+			for (int j = 1; j <= matrix1.cols; j++) {
 				result.set(i, j, matrix1.get(i, j) - matrix2.get(i, j));
 			}
 		}
@@ -133,8 +133,8 @@ public:
 	static Matrix transpose(const Matrix& matrix) {
 		Matrix result(matrix.cols, matrix.rows);
 
-		for(int i = 1; i <= matrix.rows; i++) {
-			for(int j = 1; j <= matrix.cols; j++) {
+		for (int i = 1; i <= matrix.rows; i++) {
+			for (int j = 1; j <= matrix.cols; j++) {
 				result.set(j, i, matrix.get(i, j));
 			}
 		}
@@ -142,14 +142,14 @@ public:
 	}
 
 	void map(T(*func)(T)) {
-		for(int i = 1; i <= rows; i++) {
-			for(int j = 1; j <= cols; j++) {
+		for (int i = 1; i <= rows; i++) {
+			for (int j = 1; j <= cols; j++) {
 				this->set(i, j, func(this->get(i, j)));
 			}
 		}
 	}
 
-	void fill(T * data) {
+	void fill(T* data) {
 		delete[] data;
 		data = data;
 	}
@@ -158,8 +158,8 @@ public:
 		assert(rows == cols);
 
 		int j = 0;
-		for(int i = 0; i < rows * cols; i++) {
-			if(j == i) {
+		for (int i = 0; i < rows * cols; i++) {
+			if (j == i) {
 				data[i] = 1;
 				j += cols + 1;
 			} else {
@@ -169,15 +169,15 @@ public:
 	}
 
 	void randomize() {
-		for(int i = 0; i < rows * cols; i++) {
+		for (int i = 0; i < rows * cols; i++) {
 			data[i] = (T)((((float)rand() / (float)RAND_MAX) * 2) - 1);
 		}
 	}
 
 	void print() const {
-		for(int i = 1; i <= rows * cols; i++) {
+		for (int i = 1; i <= rows * cols; i++) {
 			std::cout << data[i - 1] << " ";
-			if(i % cols == 0) {
+			if (i % cols == 0) {
 				std::cout << "\n";
 			}
 		}

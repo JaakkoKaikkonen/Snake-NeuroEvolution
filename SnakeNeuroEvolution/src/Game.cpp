@@ -12,8 +12,6 @@ namespace Game {
 		icon.loadFromFile(TOP_ICON_FILEPATH);
 
 		data->window.create(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar);
-		//data->window.setVerticalSyncEnabled(true);
-		//data->window.setFramerateLimit(60);
 
 		data->window.setPosition(sf::Vector2i(500, 200));
 
@@ -44,9 +42,6 @@ namespace Game {
 		float currentTime = this->clock.getElapsedTime().asSeconds();
 
 		float accumulator = dt;
-
-		float interpolation = 0.0f;
-
 		
 
 		while (this->data->window.isOpen()) {
@@ -79,13 +74,9 @@ namespace Game {
 				this->data->machine.getActiveState()->handleInput();
 				this->data->machine.getActiveState()->update();
 			}
-			
-			
 
 		}
 
-
 	}
-
 
 }

@@ -17,7 +17,7 @@ namespace Game {
 
 		bool ateFood(sf::Vector2f food);
 
-		bool hitDot(sf::Vector2f food);
+		bool touchFood(sf::Vector2f food);
 
 		void move(Dir dir);
 

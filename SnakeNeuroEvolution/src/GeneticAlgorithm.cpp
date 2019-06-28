@@ -16,123 +16,13 @@ GeneticAlgorithm::GeneticAlgorithm(NeuralNetwork neuralNetwork, int generationSi
 }
 
 
-void GeneticAlgorithm::crossOver() {
-
-	//cross over
-	/*std::vector<NeuralNetwork> newPopulation;
-
-	newPopulation.assign(population.size(), NeuralNetwork(population.at(0).weights1.cols, population.at(0).bias_hidden.rows, population.at(0).bias_output.rows));
-
-	for(int i = 0; i < scores.size(); i++) {
-		scores.at(i) = pow(scores.at(i), 10);
-	}
-
-	int totalScore = 0;
-	for (int i = 0; i < scores.size(); i++) {
-		totalScore += scores.at(i);
-	}
-	for (int i = 0; i < scores.size(); i++) {
-		scores.at(i) /= totalScore;
-	}
-
-
-	//std::cout << "Population size:" << population.size() << std::endl;
-	//std::cout << "new Population size: " << population.size() << std::endl;
-	//std::cout << "Scores.size(): " << scores.size() << std::endl;
-
-	for(int i = 0; i < newPopulation.size(); i++) {
-		//Pick
-		//Weights 1
-		for(int j = 0; j < population.at(0).weights1.rows * population.at(0).weights1.cols; j++) {
-
-			int index = 0;
-			float r = ((float)rand() / (float)RAND_MAX);
-
-			if(r == 1) {
-				r -= 0.01f;
-			} else if(r == 0) {
-				r += 0.01f;
-			}
-			//std::cout << r << std::endl;
-
-			while(r > 0) {
-				r = r - scores.at(index);
-				index++;
-			}
-			index--;
-
-			newPopulation.at(i).weights1.set(j, population.at(index).weights1.get(j));
-		}
-		//Weights 2
-		for(int j = 0; j < population.at(0).weights2.rows * population.at(0).weights2.cols; j++) {
-
-			int index = 0;
-			float r = ((float)rand() / (float)RAND_MAX);
-
-			if(r == 1) {
-				r -= 0.01f;
-			} else if(r == 0) {
-				r += 0.01f;
-			}
-
-			while(r > 0) {
-				r = r - scores.at(index);
-				index++;
-			}
-			index--;
-
-			newPopulation.at(i).weights2.set(j, population.at(index).weights2.get(j));
-		}
-		//Bias hidden
-		for(int j = 0; j < population.at(0).bias_hidden.rows * population.at(0).bias_hidden.cols; j++) {
-
-			int index = 0;
-			float r = ((float)rand() / (float)RAND_MAX);
-
-			if(r == 1) {
-				r -= 0.01f;
-			} else if(r == 0) {
-				r += 0.01f;
-			}
-
-			while(r > 0) {
-				r = r - scores.at(index);
-				index++;
-			}
-			index--;
-
-			newPopulation.at(i).bias_hidden.set(j, population.at(index).bias_hidden.get(j));
-		}
-		//Bias output
-		for(int j = 0; j < population.at(0).bias_output.rows * population.at(0).bias_output.cols; j++) {
-
-			int index = 0;
-			float r = ((float)rand() / (float)RAND_MAX);
-
-			if(r == 1) {
-				r -= 0.01f;
-			} else if(r == 0) {
-				r += 0.01f;
-			}
-
-			while(r > 0) {
-				r = r - scores.at(index);
-				index++;
-			}
-			index--;
-		
-			newPopulation.at(i).bias_output.set(j, population.at(index).bias_output.get(j));
-		}
-	}
-
-
-	population = newPopulation;*/
+void GeneticAlgorithm::nextGen() {
 
 	//Copy best one
 	int bestIndex = 0;
 	int highScore = 0;
 	for (int i = 0; i < population.size(); i++) {
-		if(scores.at(i) > highScore) {
+		if (scores.at(i) > highScore) {
 			highScore = scores.at(i);
 			bestIndex = i;
 		}
@@ -141,6 +31,7 @@ void GeneticAlgorithm::crossOver() {
 	for (int i = 0; i < population.size(); i++) {
 		population.at(i) = population.at(bestIndex);
 	}
+
 }
 
 void GeneticAlgorithm::mutate(float mutationRate) {

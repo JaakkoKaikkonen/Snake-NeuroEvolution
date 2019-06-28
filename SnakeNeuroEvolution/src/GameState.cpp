@@ -56,16 +56,13 @@ namespace Game {
 		if (brainIndex == generationSize) {
 			brainIndex = 0;
 
-			GA.crossOver();
+			GA.nextGen();
 			GA.mutate(0.01f);
 
-
 			//ImGui///////////////////////////////////////////////////////////////////////////////////////
-			//ImGuiLog.AddLog(("BEST SCORE: " + std::to_string(highScore) + "\n").c_str());
 			ImGuiLog.AddLog(("GENERATION: " + std::to_string(generationCount) + "\n").c_str());
 			ImGuiLog.AddLog(("GENERATION BEST SCORE: " + std::to_string(generationBestScore) + "\n").c_str());
 			///////////////////////////////////////////////////////////////////////////////////////////////
-
 
 			generationCount++;
 			generationBestScore = 0;
@@ -80,12 +77,10 @@ namespace Game {
 			//ImGui///////////////////////////////////////////////
 			ImGui::SFML::ProcessEvent(event);
 			/////////////////////////////////////////////////////
-
 			if (sf::Event::Closed == event.type) {
 				data->window.close();
 			}
 		}
-
 
 		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 			dir = Dir::Up;
@@ -97,7 +92,6 @@ namespace Game {
 			dir = Dir::Left;
 		}*/
 
-
 		if (moveTimer >= moveDelay) {
 
 			timeSinceFood++;
@@ -105,13 +99,7 @@ namespace Game {
 			//AI//////////////////////////////////////////////////////////////////
 			inputs = snake->getInputs(food.getPosition());
 
-			//std::cout << "Inputs: " << std::endl;
-			//for (int i = 0; i < NUM_OF_INPUTS; i++) {
-			//	std::cout << inputs.get(i) << std::endl;
-			//}
-
 			int output = GA.population.at(brainIndex).predict(inputs);
-			//int output = (rand() % 4) + 1;
 
 			switch(output) {
 				case 1:
@@ -140,7 +128,6 @@ namespace Game {
 
 	void GameState::update() {
 
-
 		if (!snake->isDead()) {
 
 			moveTimer++;
@@ -158,7 +145,7 @@ namespace Game {
 				////////////////////////////////////////////////////////////
 					do {
 						food.setPosition((float)(rand() % (SCREEN_WIDTH / TILESIZE) * TILESIZE), (float)(rand() % (SCREEN_HEIGHT / TILESIZE) * TILESIZE));
-					} while (snake->hitDot(food.getPosition()));
+					} while (snake->touchFood(food.getPosition()));
 					//Store food positions
 					foodPositions[score] = food.getPosition();
 				}
@@ -195,19 +182,13 @@ namespace Game {
 				if (bestSnakeFile.good()) {
 
 					bestSnakeFile.write(reinterpret_cast<char*>(&allTimeHighScore), sizeof(int));
-					bestSnakeFile.write(reinterpret_cast<char*>(foodPositions), (score + 1) * sizeof(sizeof(sf::Vector2f)));
+					bestSnakeFile.write(reinterpret_cast<char*>(foodPositions), (score + 1) * sizeof(sf::Vector2f));
 
 				} else {
 					ImGuiLog.AddLog("Problem with \"BEST-SNAKE\" output file\n");
 				}
 				bestSnakeFile.close();
 			}
-
-			/*for (int i = 0; i <= allTimeHighScore; i++) {
-				ImGuiLog.AddLog((std::to_string(foodPositions[i].x) + ", " + std::to_string(foodPositions[i].y) + "\n").c_str());
-			}
-			ImGuiLog.AddLog(std::string("------------------------------\n").c_str());*/
-
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 			this->init();
@@ -231,6 +212,7 @@ namespace Game {
 
 			this->init();
 		}
+
 		if (!playBestRun && playingBestRun) {
 			playingBestRun = false;
 		}
@@ -290,7 +272,6 @@ namespace Game {
 
 		
 
-
 		data->window.clear(sf::Color(51, 51, 51));
 		
 		snake->draw();
@@ -307,8 +288,8 @@ namespace Game {
 		///////////////////////////////////////
 
 		data->window.display();
-	}
 
+	}
 
 }
 

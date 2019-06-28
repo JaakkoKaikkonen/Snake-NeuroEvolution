@@ -26,7 +26,6 @@ float NeuralNetwork::sigmoid(float num) {
 
 int NeuralNetwork::predict(const Matrix<float>& inputs) {
 
-
 	hiddenNodes = weights1 * inputs;
 	hiddenNodes += bias_hidden;
 	hiddenNodes.map(NeuralNetwork::sigmoid);

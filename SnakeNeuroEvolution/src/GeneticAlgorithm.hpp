@@ -9,7 +9,7 @@ class GeneticAlgorithm
 public:
 	GeneticAlgorithm(NeuralNetwork neuralNetwork, int generationSize);
 
-	void crossOver();
+	void nextGen();
 	void mutate(float mutationRate);
 
 	void loadFromFile(char* snakeFileName, ImGuiLog& ImGuiLog);
