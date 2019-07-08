@@ -84,27 +84,27 @@ namespace Game {
 		return false;
 	}
 
-	void Snake::move(Dir _dir) {
+	void Snake::move(Dir dir) {
 
-		switch(dir) {
+		switch(this->dir) {
 			case Dir::Up:
-			if (_dir != Dir::Down) {
-				dir = _dir;
+			if (dir != Dir::Down) {
+				this->dir = dir;
 			}
 			break;
 			case Dir::Down:
-			if (_dir != Dir::Up) {
-				dir = _dir;
+			if (dir != Dir::Up) {
+				this->dir = dir;
 			}
 			break;
 			case Dir::Right:
-			if (_dir != Dir::Left) {
-				dir = _dir;
+			if (dir != Dir::Left) {
+				this->dir = dir;
 			}
 			break;
 			case Dir::Left:
-			if (_dir != Dir::Right) {
-				dir = _dir;
+			if (dir != Dir::Right) {
+				this->dir = dir;
 			}
 		}
 
