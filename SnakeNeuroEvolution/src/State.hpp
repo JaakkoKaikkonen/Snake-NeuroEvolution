@@ -11,9 +11,6 @@ namespace Game {
 		virtual void update() = 0;
 		virtual void draw(float dt, bool* fast) = 0;
 
-		virtual void pause() {}
-		virtual void resume() {}
-
 	};
 
 }

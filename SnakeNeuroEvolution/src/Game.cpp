@@ -31,7 +31,8 @@ namespace Game {
 
 		//-------------------------------------------------------------------------------------
 
-		data->machine.addState(stateRef(new GameState(data)), true);
+		data->state = new GameState(data);
+		data->state->init();
 
 		this->run();
 	}
@@ -39,16 +40,14 @@ namespace Game {
 	void Game::run() {
 		float newTime, frameTime;
 
-		float currentTime = this->clock.getElapsedTime().asSeconds();
+		float currentTime = clock.getElapsedTime().asSeconds();
 
 		float accumulator = dt;
 		
 
 		while (this->data->window.isOpen()) {
 
-			this->data->machine.processStateChanges();
-
-			newTime = this->clock.getElapsedTime().asSeconds();
+			newTime = clock.getElapsedTime().asSeconds();
 
 			frameTime = newTime - currentTime;
 
@@ -62,17 +61,17 @@ namespace Game {
 
 			while (accumulator >= dt) {
 
-				this->data->machine.getActiveState()->draw(dt, &fast);
+				data->state->draw(dt, &fast);
 
-				this->data->machine.getActiveState()->handleInput();
-				this->data->machine.getActiveState()->update();
+				data->state->handleInput();
+				data->state->update();
 			
 				accumulator -= dt;
 			}
 
 			if (fast) {
-				this->data->machine.getActiveState()->handleInput();
-				this->data->machine.getActiveState()->update();
+				data->state->handleInput();
+				data->state->update();
 			}
 
 		}
