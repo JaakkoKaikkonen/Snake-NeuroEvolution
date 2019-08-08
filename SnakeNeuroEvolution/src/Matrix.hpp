@@ -150,8 +150,8 @@ public:
 	}
 
 	void fill(T* data) {
-		delete[] data;
-		data = data;
+		delete[] this->data;
+		this->data = data;
 	}
 
 	void identity() {
@@ -184,4 +184,3 @@ public:
 	}
 
 };
-
