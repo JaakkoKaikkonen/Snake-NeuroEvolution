@@ -12,7 +12,6 @@ namespace Game {
 	GameState::GameState(gameDataRef _data)
 		: data(_data),
 		  food(sf::Vector2f(TILESIZE, TILESIZE)),
-		  gameOverText("Game Over", data->assets.getFont("Font")),
 		  GA(NeuralNetwork(NUM_OF_INPUTS, NUM_OF_HIDDEN, NUM_OF_OUTPUT), generationSize),
 		  inputs(NUM_OF_INPUTS, 1)
 	{
@@ -33,6 +32,10 @@ namespace Game {
 
 		food.setFillColor(sf::Color::Red);
 
+		font.loadFromFile(FONT_FILEPATH);
+
+		gameOverText.setFont(font);
+		gameOverText.setString("Game over");
 		gameOverText.setOutlineThickness(1);
 		gameOverText.setOutlineColor(sf::Color::Black);
 		gameOverText.setPosition(SCREEN_WIDTH / 2 - gameOverText.getGlobalBounds().width / 2, SCREEN_HEIGHT * 0.25);

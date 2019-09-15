@@ -36,6 +36,7 @@ namespace Game {
 
 		Dir dir;
 
+		sf::Font font;
 		sf::Text gameOverText;
 
 		bool restart = false;

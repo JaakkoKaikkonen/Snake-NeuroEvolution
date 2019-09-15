@@ -20,17 +20,6 @@ namespace Game {
 		srand((unsigned int)time(NULL));
 
 
-		//Load Resources ----------------------------------------------------------------------
-
-		//Textures
-
-		//Sounds
-
-		//Fonts
-		data->assets.loadFont("Font", FONT_FILEPATH);
-
-		//-------------------------------------------------------------------------------------
-
 		data->state = new GameState(data);
 		data->state->init();
 

@@ -4,15 +4,12 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include "AssetManager.hpp"
 #include "State.hpp"
 
 namespace Game {
 
 	struct GameData {
 		sf::RenderWindow window;
-		AssetManager assets;
-
 		State* state;
 	};
 
