@@ -83,6 +83,9 @@ namespace Game {
 			if (sf::Event::Closed == event.type) {
 				data->window.close();
 			}
+			if (sf::Event::KeyPressed == event.type) {
+				renderGui = !renderGui;
+			}
 		}
 
 		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
@@ -159,7 +162,7 @@ namespace Game {
 			restartTimer.restart();
 		}
 
-		if ((restart || timeSinceFood > 700) && restartTimer.getElapsedTime().asSeconds() > 0.0f) {
+		if ((restart || timeSinceFood > 700) && restartTimer.getElapsedTime().asSeconds() > restartDelay) {
 			restart = false;
 			delete snake;
 
@@ -228,52 +231,56 @@ namespace Game {
 		//ImGui///////////////////////////////////////////////////////////////
 		ImGui::SFML::Update(data->window, sf::seconds(dt));
 
+		if (renderGui) {
 
-		//ImGui window 1
-		ImGuiLog.Draw("Logs");
+			//ImGui window 1
+			ImGuiLog.Draw("Logs");
 
-		//ImGui window 2
-		ImGui::Begin("Score");
-		ImGui::Text(("AllTimeHighScore: " + std::to_string(allTimeHighScore)).c_str());
-		ImGui::SameLine();
-		ImGui::Text(("HighScore: " + std::to_string(highScore)).c_str());
-		ImGui::SameLine();
-		ImGui::Text(("Score: " + std::to_string(score)).c_str());
-		ImGui::End();
+			//ImGui window 2
+			ImGui::Begin("Score");
+			ImGui::Text(("AllTimeHighScore: " + std::to_string(allTimeHighScore)).c_str());
+			ImGui::SameLine();
+			ImGui::Text(("HighScore: " + std::to_string(highScore)).c_str());
+			ImGui::SameLine();
+			ImGui::Text(("Score: " + std::to_string(score)).c_str());
+			ImGui::End();
 
-		//ImGui window 3
-		ImGui::Begin("Settings");
+			//ImGui window 3
+			ImGui::Begin("Settings");
 
-		ImGui::Text("File name");
+			ImGui::Text("File name");
 
-		ImGui::InputText("", snakeFileName, 255);
+			ImGui::InputText("", snakeFileName, 255);
 
-		if (ImGui::Button("Load")) {
-			GA.loadFromFile(snakeFileName, ImGuiLog);
-		}
-
-		ImGui::SameLine();
-
-		if (ImGui::Button("Save")) {
-			if (std::string(snakeFileName) == std::string("BEST-SNAKE")) {
-				ImGuiLog.AddLog("Bad file name\n");			
-			} else {
-				GA.population.at(0).save(snakeFileName, ImGuiLog);
+			if (ImGui::Button("Load")) {
+				GA.loadFromFile(snakeFileName, ImGuiLog);
 			}
+
+			ImGui::SameLine();
+
+			if (ImGui::Button("Save")) {
+				if (std::string(snakeFileName) == std::string("BEST-SNAKE")) {
+					ImGuiLog.AddLog("Bad file name\n");			
+				} else {
+					GA.population.at(0).save(snakeFileName, ImGuiLog);
+				}
+			}
+
+			ImGui::Separator();
+
+			ImGui::Checkbox("Fast", fast);
+
+			ImGui::Separator();
+
+			ImGui::Checkbox("Play best run", &playBestRun);
+
+			ImGui::End();
+
 		}
-
-		ImGui::Separator();
-
-		ImGui::Checkbox("Fast", fast);
-
-		ImGui::Separator();
-
-		ImGui::Checkbox("Play best run", &playBestRun);
-
-		ImGui::End();
 		/////////////////////////////////////////////////////////////////////
 
-		
+		*fast ? restartDelay = 0.0f : restartDelay = 0.5f;
+
 
 		data->window.clear(sf::Color(51, 51, 51));
 		

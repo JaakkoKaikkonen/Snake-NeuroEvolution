@@ -48,6 +48,8 @@ namespace Game {
 
 		int moveDelay = 0;
 
+		float restartDelay = 0.5f;
+
 		//AI//////////////////////////////////////////////////
 		int generationSize = 20000;
 
@@ -77,6 +79,8 @@ namespace Game {
 		char snakeFileName[255] = "";
 
 		ImGuiLog ImGuiLog;
+
+		bool renderGui = true;
 		///////////////////////////////////////////////////
 
 	};
