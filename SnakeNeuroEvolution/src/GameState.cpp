@@ -12,7 +12,7 @@ namespace Game {
 	GameState::GameState(gameDataRef _data)
 		: data(_data),
 		  food(sf::Vector2f(TILESIZE, TILESIZE)),
-		  GA(NeuralNetwork(NUM_OF_INPUTS, NUM_OF_HIDDEN, NUM_OF_OUTPUT), generationSize),
+		  GA(NeuralNetwork(NUM_OF_INPUTS, NUM_OF_HIDDEN, NUM_OF_OUTPUT), GENERATION_SIZE),
 		  inputs(NUM_OF_INPUTS, 1)
 	{
 		//ImGui/////////////////////////////////////////////////////////////
@@ -56,7 +56,7 @@ namespace Game {
 		timeSinceFood = 0;
 
 		//AI/////////////////////////////////////////////////////////////////////// Record score 179
-		if (brainIndex == generationSize) {
+		if (brainIndex == GENERATION_SIZE) {
 			brainIndex = 0;
 
 			GA.nextGen();
@@ -84,7 +84,9 @@ namespace Game {
 				data->window.close();
 			}
 			if (sf::Event::KeyPressed == event.type) {
-				renderGui = !renderGui;
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
+					renderGui = !renderGui;
+				}
 			}
 		}
 

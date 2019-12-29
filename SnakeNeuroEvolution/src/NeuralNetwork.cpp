@@ -9,7 +9,7 @@ NeuralNetwork::NeuralNetwork(int _numOfInputs, int _numOfhiddenNodes, int _numOf
 	  outputs(_numOfoutputs, 1),
 	  weights1(_numOfhiddenNodes, _numOfInputs), 
 	  weights2(_numOfoutputs, _numOfhiddenNodes),
-	  bias_hidden(_numOfhiddenNodes, 1), 
+	  bias_hidden(_numOfhiddenNodes, 1),
 	  bias_output(_numOfoutputs, 1)
 {
 	weights1.randomize();
@@ -32,7 +32,7 @@ int NeuralNetwork::predict(const Matrix<float>& inputs) {
 
 	outputs = weights2 * hiddenNodes;
 	outputs += bias_output;
-	outputs.map(NeuralNetwork::sigmoid);
+	//outputs.map(NeuralNetwork::sigmoid);
 
 
 	int index = 0;

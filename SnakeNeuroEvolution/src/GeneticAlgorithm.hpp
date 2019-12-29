@@ -1,5 +1,6 @@
 #pragma once
 #include "NeuralNetwork.hpp"
+#include "DEFINITIONS.hpp"
 #include <vector>
 
 #include "ImGuiLog.h"

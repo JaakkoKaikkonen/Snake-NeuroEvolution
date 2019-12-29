@@ -19,7 +19,7 @@ GeneticAlgorithm::GeneticAlgorithm(NeuralNetwork neuralNetwork, int generationSi
 void GeneticAlgorithm::nextGen() {
 
 	//Copy best one
-	int bestIndex = 0;
+	/*int bestIndex = 0;
 	int highScore = 0;
 	for (int i = 0; i < population.size(); i++) {
 		if (scores.at(i) > highScore) {
@@ -30,12 +30,45 @@ void GeneticAlgorithm::nextGen() {
 
 	for (int i = 0; i < population.size(); i++) {
 		population.at(i) = population.at(bestIndex);
+	}*/
+
+	
+	//Select from old population with change assigned by score
+	int highScoreIndex = 0;
+	int totalScore = 0;
+	for (int i = 0; i < scores.size(); i++) {
+		totalScore += scores.at(i);
+		if (scores.at(i) > scores.at(highScoreIndex)) {
+			highScoreIndex = i;
+		}
 	}
+
+	std::vector<NeuralNetwork> tempPopulation;
+	tempPopulation.reserve(GENERATION_SIZE);
+
+	tempPopulation.assign(GENERATION_SIZE * 0.2f, population.at(highScoreIndex));
+
+	for (int i = GENERATION_SIZE * 0.2f; i < population.size(); i++) {
+		int randNum = rand() / (float)RAND_MAX * totalScore;
+
+		int counter = 0;
+		int index = -1;
+		
+		do {
+			index++;
+			counter += scores.at(index);
+		} while (counter < randNum);
+
+		tempPopulation.push_back(population.at(index));
+
+	}
+
+	population = tempPopulation;
 
 }
 
 void GeneticAlgorithm::mutate(float mutationRate) {
-	for (int i = 2000; i < population.size(); i++) {
+	for (int i = GENERATION_SIZE * 0.1f; i < population.size(); i++) {
 		for (int j = 0; j < population.at(i).weights1.rows * population.at(i).weights1.cols; j++) {
 			if (((float)rand() / (float)RAND_MAX) < mutationRate) {
 				population.at(i).weights1.set(j, (((float)rand() / (float)RAND_MAX) * 2) - 1);

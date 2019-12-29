@@ -51,8 +51,6 @@ namespace Game {
 		float restartDelay = 0.5f;
 
 		//AI//////////////////////////////////////////////////
-		int generationSize = 20000;
-
 		int brainIndex = 0;
 
 		GeneticAlgorithm GA;
