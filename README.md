@@ -1,6 +1,7 @@
 # Snake-NeuroEvolution
 
-Neural Network that learns to play snake using a Genetic algorithm.
+Neural Network learns to play snake using a Genetic algorithm.  
+(High score: 179)
 
 ![alt text](https://github.com/JaakkoKaikkonen/Snake-NeuroEvolution/blob/master/Snake.gif)
 
